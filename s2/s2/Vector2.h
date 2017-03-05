@@ -5,6 +5,11 @@ struct Vector2 {
 	float x, y;
 	Vector2();
 	Vector2(float, float);
+	
+	/*
+	в данном случае конструктор копирования и оператор присваивания можно было и не писать явно.
+	компилятор бы сам все правильно сгенерировал.
+	*/
 	Vector2(const Vector2&);
 	//~Vector2();
 	Vector2& operator=(const Vector2&);
