@@ -27,6 +27,13 @@ struct Vector2 {
 	Vector2 norm() const;		// t = a/|a|
 	Vector2 ort() const;		// n _|_ a, |n| = 1
 	Vector2 operator-() const;	// b = -a
+	
+	/*
+	поворот на угол допишите ещё:
+	
+	Vector2& rotate(float angle);
+	Vector2 getRotated(float angle) const;
+	*/
 	int operator==(const Vector2&) const;	// a == b
 	int operator!=(const Vector2&) const;	// a != b
 	int operator||(const Vector2&) const;	// a || b (Xa = f * Xb, Ya = f * Yb)
