@@ -14,20 +14,19 @@ std::string prepare(const std::string& s) {
 	std::string data;
 	data.resize(s.size());
 	std::transform(s.begin(), s.end(), data.begin(), ::tolower);
-	// можно было написать ispunct(data.front())
-	while (ispunct(*(data.begin()))) {
+	
+	while (ispunct(data.front())) {
 		data.erase(data.begin());
 	}
-	// а тут ispunct(data.back())
-	while (ispunct(*(data.end() - 1))) {
+	
+	while (ispunct(data.back())) {
 		data.pop_back();
 	}
 	return data;
 }
 
-// чтобы в названии переменных была хоть какая-то ясность, назовите хотя бы left и right
-bool compare(Statistics a, Statistics b) {
-	return (a.count > b.count);
+bool compare(Statistics left, Statistics right) {
+	return (left.count > right.count);
 }
 
 int main() {
@@ -50,8 +49,8 @@ int main() {
 				vocabulary[word] = 1;
 			}
 		}
-		// про for(auto it : vocabulary) вы видели в презентации надеюсь
-		for (auto it = vocabulary.begin(); it != vocabulary.end(); it++) {
+
+		for (auto it: vocabulary) {
 			Statistics temp;
 			temp.word = it->first;
 			temp.count = it->second;
