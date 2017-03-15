@@ -4,3 +4,5 @@
 #include "forceLines.h"
 #include "Vector2.h"
 #include <vector>
+
+#define LINES_NUMBER 16

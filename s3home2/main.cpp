@@ -49,8 +49,33 @@ int main() {
 			}
 			
 		}
+
+
 		window.clear(sf::Color::Black);
+
 		for (auto i = 0; i < E.charges.size(); ++i) {
+			Charge q[LINES_NUMBER];
+			for (auto j = 0; j < LINES_NUMBER; ++j) {
+				q[j] = E.charges[i];
+				q[j].pos += Vector2(((float) plusSize.x) / 2 * cos((float)j / LINES_NUMBER * 3.14 * 2),
+								   ((float) plusSize.y) / 2 * sin((float)j / LINES_NUMBER * 3.14 * 2));
+			}
+			
+			for (auto k = 0; k < 1000; ++k) {
+				Vector2 F[LINES_NUMBER];
+
+				for (auto j = 0; j < LINES_NUMBER; ++j) {
+					F[j] = E.findForce(q[j]).norm();
+
+					sf::Vertex line[] = {
+						sf::Vertex(sf::Vector2f(q[j].pos.x, q[j].pos.y)),
+						sf::Vertex(sf::Vector2f(q[j].pos.x + F[j].x, q[j].pos.y + F[j].y))
+					};
+					q[j].pos += F[j];
+					window.draw(line, 2, sf::Lines);
+				}
+			}
+
 			if (E.charges[i].value < 0) {
 				minus.setPosition(E.charges[i].pos.x, E.charges[i].pos.y);
 				window.draw(minus);
@@ -59,55 +84,11 @@ int main() {
 				plus.setPosition(E.charges[i].pos.x, E.charges[i].pos.y);
 				window.draw(plus);
 			}
-
-			Charge q1, q2, q3, q4;
-			q1 = q2 = q3 = q4 = E.charges[i];
-			q1.pos += Vector2(plusSize.x / 2, 0);
-			q2.pos += Vector2(0, plusSize.y / 2);
-			q3.pos += Vector2(-(int)(plusSize.x / 2), 0);
-			q4.pos += Vector2(0, -(int)(plusSize.y / 2));
-			
-			for (auto k = 0; k < 2000; ++k) {
-
+		}
 				//LineOfForce lof;
 				//lof.positiveBranch.push_back(E.findForce(q1).norm());
 				//lof.negativeBranch.push_back(-E.findForce(q).norm());
 				//E.lines.push_back(lof);
-
-				Vector2 F1 = E.findForce(q1).norm();
-				Vector2 F2 = E.findForce(q2).norm();
-				Vector2 F3 = E.findForce(q3).norm();
-				Vector2 F4 = E.findForce(q4).norm();
-
-				sf::Vertex line1[] = {
-					sf::Vertex(sf::Vector2f(q1.pos.x, q1.pos.y)),
-					sf::Vertex(sf::Vector2f(q1.pos.x + F1.x, q1.pos.y + F1.y))
-				};
-				q1.pos += F1;
-				window.draw(line1, 2, sf::Lines);
-
-				sf::Vertex line2[] = {
-					sf::Vertex(sf::Vector2f(q2.pos.x, q2.pos.y)),
-					sf::Vertex(sf::Vector2f(q2.pos.x + F2.x, q2.pos.y + F2.y))
-				};
-				q2.pos += F2;
-				window.draw(line2, 2, sf::Lines);
-
-				sf::Vertex line3[] = {
-					sf::Vertex(sf::Vector2f(q3.pos.x, q3.pos.y)),
-					sf::Vertex(sf::Vector2f(q3.pos.x + F3.x, q3.pos.y + F3.y))
-				};
-				q3.pos += F3;
-				window.draw(line3, 2, sf::Lines);
-
-				sf::Vertex line4[] = {
-					sf::Vertex(sf::Vector2f(q4.pos.x, q4.pos.y)),
-					sf::Vertex(sf::Vector2f(q4.pos.x + F4.x, q4.pos.y + F4.y))
-				};
-				q4.pos += F4;
-				window.draw(line4, 2, sf::Lines);
-			}
-		}
 		/*for (auto i = 0; i < 200; ++i) {
 			//if (f) std::cout << E.charges[0].pos << "\n";
 
