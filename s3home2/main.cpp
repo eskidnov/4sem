@@ -61,6 +61,7 @@ int main() {
 								   ((float) plusSize.y) / 2 * sin((float)j / LINES_NUMBER * 3.14 * 2));
 			}
 			
+			/* что за магическое число 100? */
 			for (auto k = 0; k < 1000; ++k) {
 				Vector2 F[LINES_NUMBER];
 
