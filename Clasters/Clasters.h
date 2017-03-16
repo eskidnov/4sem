@@ -1,5 +1,12 @@
 #pragma once
-// May be neede libraries ...
+// May be need libraries ...
+
+/*
+по-хорошему как раз здесь и надо было написать 
+
+#include <vector>
+#include <sfml/ ...>
+*/
 
 using Centroids = std::vector<sf::Color>;
 using ClosestCentroidIndices = std::vector<int>;
