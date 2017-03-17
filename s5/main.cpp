@@ -3,6 +3,9 @@
 #include "Figures.h"
 #include <vector>
 
+/*
+fixit: передавайте объекты по константной ссылке
+*/
 Vector2 GetDeltaP(Ball ball1, Ball ball2) {
 	Vector2 d;
 
@@ -62,6 +65,10 @@ int main() {
 				balls[i].velocity.y *= -1;
 			}
 
+			/*
+			можно писать j = i + 1; j < ...
+			в 2 раза быстрее ...
+			*/
 			for (auto j = 0; j < balls.size(); ++j) {
 				if (i != j) {
 					Vector2 dp;
